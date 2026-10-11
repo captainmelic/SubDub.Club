@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="320" height="320" viewBox="0 0 320 320">
+  <title>Sub sandwich tile</title>
+  <defs>
+  <g id="sub" fill="none" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- top bun, score marks, sesame seeds -->
+    <path d="M -92,-9 C -94,-22 -60,-30 0,-30 C 60,-30 94,-22 92,-9 Z"/>
+    <path d="M -48,-22 q 5,5 3,12 M -16,-26 q 5,5 3,12 M 16,-26 q 5,5 3,12 M 48,-22 q 5,5 3,12"/>
+    <ellipse cx="-68" cy="-14" rx="3" ry="1.5" transform="rotate(-25 -68 -14)"/>
+    <ellipse cx="-32" cy="-20" rx="3" ry="1.5" transform="rotate(15 -32 -20)"/>
+    <ellipse cx="0" cy="-21" rx="3" ry="1.5" transform="rotate(-10 0 -21)"/>
+    <ellipse cx="32" cy="-20" rx="3" ry="1.5" transform="rotate(20 32 -20)"/>
+    <ellipse cx="68" cy="-14" rx="3" ry="1.5" transform="rotate(25 68 -14)"/>
+    <!-- lettuce, tomato slices, cheese with a drooping corner -->
+    <path d="M -87,-5 q 7.25,-7 14.5,0 t 14.5,0 t 14.5,0 t 14.5,0 t 14.5,0 t 14.5,0 t 14.5,0 t 14.5,0 t 14.5,0 t 14.5,0 t 14.5,0 t 14.5,0"/>
+    <ellipse cx="-54" cy="3.5" rx="11" ry="4.5"/>
+    <ellipse cx="-18" cy="3.5" rx="11" ry="4.5"/>
+    <ellipse cx="18" cy="3.5" rx="11" ry="4.5"/>
+    <ellipse cx="54" cy="3.5" rx="11" ry="4.5"/>
+    <path d="M -80,10.5 H 80 M 20,10.5 L 27,19 L 34,10.5"/>
+    <!-- bottom bun (top edge left open where the cheese hangs over) and crust line -->
+    <path d="M 34,13 H 88 C 92,22 70,28 0,28 C -70,28 -92,22 -88,13 H 20"/>
+    <path d="M -64,21 C -34,24.5 34,24.5 64,21"/>
+  </g>
+  </defs>
+  <!-- one sub in the middle, one split across the corners: repeats seamlessly in a staggered pattern -->
+  <use href="#sub" xlink:href="#sub" transform="translate(160.0 160.0) rotate(-35)"/>
+  <use href="#sub" xlink:href="#sub" transform="translate(0 0) rotate(-35)"/>
+  <use href="#sub" xlink:href="#sub" transform="translate(320 0) rotate(-35)"/>
+  <use href="#sub" xlink:href="#sub" transform="translate(0 320) rotate(-35)"/>
+  <use href="#sub" xlink:href="#sub" transform="translate(320 320) rotate(-35)"/>
+</svg>

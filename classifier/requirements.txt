@@ -1,0 +1,7 @@
+flask>=3.0
+gunicorn>=22.0
+pillow>=10.0
+numpy<2.3
+mediapipe>=0.10.14
+transformers>=4.40,<5
+# torch (CPU build) is installed separately, see SETUP.md

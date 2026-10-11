@@ -1,0 +1,13 @@
+[Unit]
+Description=Sub classifier
+After=network.target
+
+[Service]
+User=www-data
+WorkingDirectory=/var/www/subtracker/classifier
+Environment=HF_HOME=/var/www/subtracker/classifier/.hf
+ExecStart=/var/www/subtracker/classifier/venv/bin/gunicorn -w 1 --timeout 120 -b 127.0.0.1:5001 app:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

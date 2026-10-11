@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SubDub Club</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ AUTH VIEW ============ -->
+  <main id="auth-view" class="auth hidden">
+    <div class="card auth-card">
+	    <h1 class="logo" ><span style="font-weight: 100;color: #a79bc4;">Welcome to</span> THE Sub<span class="logo" >Dub</span>.Club</h1>
+      <p class="muted">Snap a sub. Rate it. Keep the streak alive.</p>
+      <div class="tabs">
+        <button id="tab-login" class="tab active" type="button">Log in</button>
+        <button id="tab-register" class="tab" type="button">Sign up</button>
+      </div>
+      <form id="auth-form" autocomplete="on">
+        <label>Username
+          <input id="auth-username" name="username" required minlength="3" maxlength="24" autocomplete="username">
+        </label>
+        <label>Password
+          <input id="auth-password" name="password" type="password" required minlength="8" autocomplete="current-password">
+        </label>
+        <p id="auth-error" class="error" role="alert"></p>
+        <button id="auth-submit" class="btn primary" type="submit">Log in</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- ============ DASHBOARD VIEW ============ -->
+  <div id="dash-view" class="hidden">
+    <header class="topbar">
+      <h1 class="logo">Sub<span>Dub</span>.Club</h1>
+      <div class="topbar-right">
+        <span id="user-pill" class="pill"></span>
+        <button id="logout-btn" class="avatar" type="button" title="Log out" aria-label="Log out">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- Upload tile -->
+      <button id="upload-tile" class="card tile upload-tile" type="button">
+        <svg viewBox="0 0 64 64" width="84" height="84" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 20h12l4-7h16l4 7h12v32H8z"/><circle cx="32" cy="35" r="10"/><circle cx="32" cy="35" r="4"/>
+        </svg>
+        <span id="upload-label">Upload today's sub</span>
+      </button>
+
+      <!-- Streak tile -->
+      <section class="card tile streak-tile">
+        <h2>Your streak</h2>
+        <div class="streak-row">
+          <svg viewBox="0 0 48 48" width="64" height="64" aria-hidden="true">
+            <path d="M24 4c2 8 12 12 12 24a12 12 0 0 1-24 0c0-6 3-9 6-12 0 4 2 6 4 6 0-6-2-10 2-18z" fill="var(--green)"/>
+          </svg>
+          <div><span id="streak-num" class="big">0</span> <span id="streak-unit" class="muted">days</span></div>
+        </div>
+        <p class="muted small">Best: <span id="longest-num">0</span> days</p>
+      </section>
+
+      <!-- Leaderboard -->
+      <section class="card tile leaderboard">
+        <h2>Leaderboard</h2>
+        <ol id="leaderboard-list" class="list"></ol>
+      </section>
+
+      <!-- Calendar week -->
+      <section class="card tile calendar">
+        <h2>Calendar week</h2>
+        <div id="week" class="week"></div>
+      </section>
+     
+      <!--
+       Top subs 
+
+      <section class="card tile topsubs">
+        <h2>Top subs</h2>
+        <ol id="topsubs-list" class="list"></ol>
+      </section>
+      -->
+    </main>
+  </div>
+
+  <!-- ============ UPLOAD POPUP ============ -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <button id="modal-close" class="close" type="button" aria-label="Close">&times;</button>
+      <h2 id="modal-title" class="sr-only">Upload your sub</h2>
+
+      <div id="stars" class="stars" role="radiogroup" aria-label="Rating"></div>
+
+      <label class="preview" for="file-input">
+        <img id="preview-img" alt="" class="hidden">
+        <span id="preview-empty">
+          <svg viewBox="0 0 64 64" width="56" height="56" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 20h12l4-7h16l4 7h12v32H8z"/><circle cx="32" cy="35" r="10"/>
+          </svg><br>Tap to choose a photo
+        </span>
+      </label>
+      <input id="file-input" type="file" accept="image/*" capture="environment" class="sr-only">
+
+      <input id="note-input" class="note" type="text" maxlength="255" placeholder="note">
+      <p id="modal-error" class="error" role="alert"></p>
+      <button id="submit-btn" class="btn primary" type="button">Submit</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+  
+  <button   style="display: block;
+  margin: 0 auto;" id="theme-toggle" class="pill">Light Mode</button>
+
+
+
+  <script src="app.js"></script>
+
+  <script>
+  const root = document.documentElement;
+  const toggle = document.getElementById("theme-toggle");
+
+  // Load saved theme
+  const saved = localStorage.getItem("theme");
+  if (saved) {
+    root.setAttribute("data-theme", saved);
+    toggle.textContent = saved === "light" ? "Dark Mode" : "Light Mode";
+  }
+
+  toggle.addEventListener("click", () => {
+    const current = root.getAttribute("data-theme") || "dark";
+    const next = current === "light" ? "dark" : "light";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+    toggle.textContent = next === "light" ? "Dark Mode" : "Light Mode";
+  });
+</script>
+
+
+
+
+
+</body>
+</html>
