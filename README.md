@@ -1,4 +1,9 @@
+##Subdub Club
+
+KnightHacks IX Hackathon Submission.
 All believed-to-be necessary files taken from the droplet. This repository may not be able to create an exact replica of the original droplet.
+
+Devpost: https://devpost.com/software/subdubs
 
 ## Inspiration
 The pub subs on the first day of the hackathon really struck a chord with us. They were so succulent and delicious that we couldn't stop talking about them.
